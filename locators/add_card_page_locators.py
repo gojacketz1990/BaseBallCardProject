@@ -3,10 +3,12 @@ class AddCardPageLocators():
     my_cards_link_locator = [
         ("link_text", "MY CARDS"),
     ]
+
     cardname_locator = [
         ("id", "cardname"),
         ("css", "#cardname")
     ]
+
     cardnumber_locator = [
         ("id", "cardnumber"),
         ("css", "#cardnumber")
