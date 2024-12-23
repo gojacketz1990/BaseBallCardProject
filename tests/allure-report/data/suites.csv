@@ -1,0 +1,3 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","15060","test_add_card_form[Test 2]","tests","Tue Dec 03 12:01:22 EST 2024","passed","Tue Dec 03 12:01:37 EST 2024","TestUserHomePage","test_addcardformvalidationparameter","",""
+"","15252","test_add_card_form[Test 1]","tests","Tue Dec 03 12:01:04 EST 2024","passed","Tue Dec 03 12:01:19 EST 2024","TestUserHomePage","test_addcardformvalidationparameter","",""
