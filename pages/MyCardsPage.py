@@ -18,7 +18,7 @@ class MyCardsPage(BasePage):
         self.select_from_dropdown_by_visible_text(self.myCardsPageLocators.cardcompanyfilterdropdown_locator, cardcompany)
 
     def selectReleaseFilter(self, release):
-        self.select_from_dropdown_by_visible_text(self.myCardsPageLocators.cardcompanyfilterdropdown_locator, release)
+        self.select_from_dropdown_by_visible_text(self.myCardsPageLocators.cardreleasefilterdropdown_locator, release)
 
     def selectYearFilter(self, year):
         self.select_from_dropdown_by_visible_text(self.myCardsPageLocators.yearfilterdropdown_locator, year)
@@ -45,7 +45,6 @@ class MyCardsPage(BasePage):
         self.select_from_dropdown_by_visible_text(self.myCardsPageLocators.sortoderdropdown_locator, sort)
 
 
-        sortoderdropdown_locator
     def deleteCard(self,cardname):
 
         cards = self.get_elements(self.myCardsPageLocators.cards_locator)
@@ -77,4 +76,10 @@ class MyCardsPage(BasePage):
                 time.sleep(3)
                 return UpdateCardPage(self.driver)
 
+
+    def countCards(self):
+        from pages.UpdateCardPage import UpdateCardPage  # Lazy import to avoid circular dependency
+        cards = self.get_elements(self.myCardsPageLocators.cards_locator)
+        #print(len(cards))
+        return len(cards)
 

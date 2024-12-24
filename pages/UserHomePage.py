@@ -19,3 +19,8 @@ class UserHomePage(BasePage):
         from pages.MyCardsPage import MyCardsPage  # Lazy import to avoid circular dependency
         self.element_click(self.usersHomePageLocators.my_cards_link_locator)
         return MyCardsPage(self.driver)
+
+    def click_userlink(self):
+        from pages.MyCardsPage import MyCardsPage  # Lazy import to avoid circular dependency
+        self.element_click( self.usersHomePageLocators.user_link_locator)
+        return MyCardsPage(self.driver)

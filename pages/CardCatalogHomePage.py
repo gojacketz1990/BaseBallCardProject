@@ -23,3 +23,4 @@ class CardCatalogHome(BasePage):
 
     def click_allusers(self):
         self.element_click( self.CardCatalogHomeLocators.all_users_locator)
+
