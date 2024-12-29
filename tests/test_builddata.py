@@ -2,8 +2,10 @@ import random
 from faker import Faker
 from utilities.BaseTests import BaseTests
 from pages.CardCatalogHomePage import CardCatalogHome
-
+import configparser
 class TestUserHomePage(BaseTests):
+
+
     def test_random_mycard_form(self):
         log = self.getLogger()
         cardCatalogHome = CardCatalogHome(self.driver)

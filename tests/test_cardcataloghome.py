@@ -3,7 +3,7 @@ import time
 from utilities.BaseTests import BaseTests
 from pages.CardCatalogHomePage import CardCatalogHome
 import pytest
-
+import configparser
 
 class TestCardCatalogHome(BaseTests):
 

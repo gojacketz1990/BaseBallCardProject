@@ -4,7 +4,7 @@ from utilities.BaseTests import BaseTests
 from pages.CardCatalogHomePage import CardCatalogHome
 from pages.BaseballAuthenticatePage import AuthenticationPage
 from pages.UserHomePage import UserHomePage
-
+import configparser
 class TestUserHomePage(BaseTests):
 
     def test_mycard_link(self):
@@ -16,12 +16,11 @@ class TestUserHomePage(BaseTests):
         authenticationPage = cardCatalogHome.click_authenticate()#Ok
         time.sleep(2)
 
-        userhomepage = authenticationPage.login_to_site('gojacketz@icloud.com', 'reapit')
+        userHomePage = authenticationPage.login_to_site(self.username, self.password)
         time.sleep(1)
 
-        #userhomepage = UserHomePage(self.driver)
 
-        userhomepage.click_mycards()
+        userHomePage.click_mycards()
         time.sleep(3)
 
 

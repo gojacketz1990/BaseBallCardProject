@@ -10,6 +10,7 @@ import pytest
 from utilities.BaseTests import BaseTests
 from pages.CardCatalogHomePage import CardCatalogHome
 from utilities.csv_utils import read_csv
+import configparser
 
 
 # Load CSV data as a class attribute
@@ -36,7 +37,7 @@ class TestAddCardFormPage(BaseTests):
         log = self.getLogger()
         cardCatalogHome = CardCatalogHome(self.driver)
         authenticationPage = cardCatalogHome.click_authenticate()
-        userHomePage = authenticationPage.login_to_site('gojacketz@icloud.com', 'reapit')
+        userHomePage = authenticationPage.login_to_site(self.username, self.password)
         addCardPage = userHomePage.click_addCard()
 
         # Generate fake data

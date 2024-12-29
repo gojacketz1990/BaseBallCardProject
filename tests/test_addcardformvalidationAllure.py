@@ -9,6 +9,7 @@ import pytest
 from utilities.BaseTests import BaseTests
 from pages.CardCatalogHomePage import CardCatalogHome
 from utilities.csv_utils import read_csv
+import configparser
 
 
 # Load CSV data as a class attribute
@@ -23,7 +24,6 @@ test_cases = [(row, row['TestName']) for row in csv_data]
 #to view:  allure open allure-report
 @pytest.mark.usefixtures("setup_and_teardown")  # Ensure setup from BaseTests is applied
 class TestUserHomePage(BaseTests):
-
 
     @pytest.mark.parametrize("row", csv_data, ids=lambda row: row['TestName'])
     @allure.title("Test Add Card Form")
@@ -41,7 +41,7 @@ class TestUserHomePage(BaseTests):
         cardCatalogHome = CardCatalogHome(self.driver)
         with allure.step("Authenticate the user"):
             authenticationPage = cardCatalogHome.click_authenticate()
-            userHomePage = authenticationPage.login_to_site('gojacketz@icloud.com', 'reapit')
+            userHomePage = authenticationPage.login_to_site(self.username, self.password)
 
         with allure.step("Navigate to Add Card Page"):
             addCardPage = userHomePage.click_addCard()

@@ -3,15 +3,19 @@ from faker import Faker
 from utilities.BaseTests import BaseTests
 from pages.CardCatalogHomePage import CardCatalogHome
 from utilities.csv_utils import read_csv
-
+import configparser
 class TestUserHomePage(BaseTests):
+
     def test_random_mycard_form(self):
+
+
+
         log = self.getLogger()
         cardCatalogHome = CardCatalogHome(self.driver)
 
         authenticationPage = cardCatalogHome.click_authenticate()
 
-        userHomePage = authenticationPage.login_to_site('gojacketz@icloud.com', 'reapit')
+        userHomePage = authenticationPage.login_to_site(self.username, self.password)
 
         file_path = '../TestData/AddCardValidation.csv'
         data = read_csv(file_path)

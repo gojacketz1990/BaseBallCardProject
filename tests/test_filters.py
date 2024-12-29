@@ -4,16 +4,19 @@ from utilities.BaseTests import BaseTests
 from pages.CardCatalogHomePage import CardCatalogHome
 from utilities.csv_utils import read_csv
 import time
+import configparser
+
 class TestMyCardsPage(BaseTests):
 
     def test_filter(self):
+
         log = self.getLogger()
 
         cardCatalogHome = CardCatalogHome(self.driver)
 
         authenticationPage = cardCatalogHome.click_authenticate()
 
-        userHomePage = authenticationPage.login_to_site('gojacketz@icloud.com', 'reapit')
+        userHomePage = authenticationPage.login_to_site(self.username, self.password)
 
         myCardPage = userHomePage.click_userlink()
         time.sleep(3)

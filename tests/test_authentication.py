@@ -3,7 +3,7 @@ import time
 from utilities.BaseTests import BaseTests
 from pages.CardCatalogHomePage import CardCatalogHome
 from pages.BaseballAuthenticatePage import AuthenticationPage
-
+import configparser
 
 class TestLogins(BaseTests):
 
@@ -16,7 +16,7 @@ class TestLogins(BaseTests):
         authenticationPage = cardCatalogHome.click_authenticate()#Ok
         time.sleep(1)
 
-        authenticationPage.login_to_site('gojacketz@icloud.com', 'reapithh')
+        authenticationPage.login_to_site(self.username, 'reapithh')
         time.sleep(1)
 
     def test_valid_login(self):
@@ -28,5 +28,5 @@ class TestLogins(BaseTests):
         authenticationPage = cardCatalogHome.click_authenticate()#Ok
         time.sleep(1)
 
-        authenticationPage.login_to_site('gojacketz@icloud.com', 'reapit')
+        authenticationPage.login_to_site(self.username, self.password)
         time.sleep(1)

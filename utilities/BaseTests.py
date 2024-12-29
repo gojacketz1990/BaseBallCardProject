@@ -3,6 +3,7 @@ import logging
 import pytest
 from datetime import datetime
 import base64
+import configparser
 
 @pytest.mark.usefixtures("setup_and_teardown")
 class BaseTests:
@@ -11,6 +12,12 @@ class BaseTests:
     @classmethod
     def setup_class(cls):
         cls.logger = cls.getLogger()
+        cls.config = configparser.ConfigParser()
+        cls.config.read('../configurations/config.ini')
+
+        # Retrieve credentials and settings
+        cls.username = cls.config.get('credentials', 'username')
+        cls.password = cls.config.get('credentials', 'password')
 
     def create_emailAddress(self):
         timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
@@ -50,6 +57,9 @@ class BaseTests:
         mydecode  = todecode.encode("utf-8")
         mydecode = base64.decodebytes(mydecode).decode('ascii')
         return mydecode
+
+
+
 
 
     @classmethod
