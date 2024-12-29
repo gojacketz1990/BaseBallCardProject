@@ -43,7 +43,6 @@ class TestUserHomePage(BaseTests):
             authenticationPage = cardCatalogHome.click_authenticate()
             userHomePage = authenticationPage.login_to_site('gojacketz@icloud.com', 'reapit')
 
-
         with allure.step("Navigate to Add Card Page"):
             addCardPage = userHomePage.click_addCard()
 

@@ -36,7 +36,7 @@ class TestUserHomePage(BaseTests):
         log = self.getLogger()
         cardCatalogHome = CardCatalogHome(self.driver)
         authenticationPage = cardCatalogHome.click_authenticate()
-        userHomePage = authenticationPage.login_to_site('gojacketz@gmail.com', 'reapit')
+        userHomePage = authenticationPage.login_to_site('gojacketz@icloud.com', 'reapit')
         myCardPage = userHomePage.click_mycards()
 
         updateCardPage = myCardPage.editCard(row.get('cardname'))

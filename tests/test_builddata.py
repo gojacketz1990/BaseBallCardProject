@@ -10,7 +10,7 @@ class TestUserHomePage(BaseTests):
 
         authenticationPage = cardCatalogHome.click_authenticate()
 
-        userHomePage = authenticationPage.login_to_site('gojacketz@gmail.com', 'reapit')
+        userHomePage = authenticationPage.login_to_site('gojacketz@icloud.com', 'reapit')
 
         for i in range(1000):
             addCardPage = userHomePage.click_addCard()

@@ -16,7 +16,7 @@ class TestUserHomePage(BaseTests):
         authenticationPage = cardCatalogHome.click_authenticate()#Ok
         time.sleep(2)
 
-        userhomepage = authenticationPage.login_to_site('gojacketz@gmail.com', 'reapit')
+        userhomepage = authenticationPage.login_to_site('gojacketz@icloud.com', 'reapit')
         time.sleep(1)
 
         #userhomepage = UserHomePage(self.driver)

@@ -73,6 +73,7 @@ def pytest_html_results_table_row(report, cells):
     description = getattr(report, "description", "No description provided")
     cells.insert(2, f"<td>{description}</td>")
 
+
 @pytest.hookimpl(tryfirst=True, hookwrapper=True)
 def pytest_runtest_makereport(item, call):
     """Attach the test description to the report."""

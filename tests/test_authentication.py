@@ -16,7 +16,7 @@ class TestLogins(BaseTests):
         authenticationPage = cardCatalogHome.click_authenticate()#Ok
         time.sleep(1)
 
-        authenticationPage.login_to_site('gojacketz@gmail.com', 'reapithh')
+        authenticationPage.login_to_site('gojacketz@icloud.com', 'reapithh')
         time.sleep(1)
 
     def test_valid_login(self):
@@ -28,5 +28,5 @@ class TestLogins(BaseTests):
         authenticationPage = cardCatalogHome.click_authenticate()#Ok
         time.sleep(1)
 
-        authenticationPage.login_to_site('gojacketz@gmail.com', 'reapit')
+        authenticationPage.login_to_site('gojacketz@icloud.com', 'reapit')
         time.sleep(1)

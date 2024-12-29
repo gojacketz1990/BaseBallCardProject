@@ -11,9 +11,7 @@ class TestUserHomePage(BaseTests):
 
         authenticationPage = cardCatalogHome.click_authenticate()
 
-        userHomePage = authenticationPage.login_to_site('gojacketz@gmail.com', 'reapit')
-
-
+        userHomePage = authenticationPage.login_to_site('gojacketz@icloud.com', 'reapit')
 
         file_path = '../TestData/AddCardValidation.csv'
         data = read_csv(file_path)
