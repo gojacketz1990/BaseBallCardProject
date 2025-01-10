@@ -44,6 +44,10 @@ class MyCardsPage(BasePage):
     def sortbyNumber(self, sort):
         self.select_from_dropdown_by_visible_text(self.myCardsPageLocators.sortoderdropdown_locator, sort)
 
+    def deleteFirstCard(self):
+        self.element_click(self.myCardsPageLocators.first_delete_locator)
+        self.element_click(self.myCardsPageLocators.confirm_delete_button_loctor)
+
 
     def deleteCard(self,cardname):
 

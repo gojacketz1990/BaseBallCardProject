@@ -26,7 +26,7 @@ class TestMyCardsPage(BaseTests):
 
         authenticationPage = cardCatalogHome.click_authenticate()
 
-        userHomePage = authenticationPage.login_to_site('gojacketz@icloud.com', 'reapit')
+        userHomePage = authenticationPage.login_to_site(self.username, self.password)
 
         myCardPage = userHomePage.click_mycards()
 
@@ -39,7 +39,7 @@ class TestMyCardsPage(BaseTests):
 
         authenticationPage = cardCatalogHome.click_authenticate()
 
-        userHomePage = authenticationPage.login_to_site('gojacketz@icloud.com', 'reapit')
+        userHomePage = authenticationPage.login_to_site(self.username, self.password)
 
         myCardPage = userHomePage.click_mycards()
 

@@ -74,6 +74,12 @@ class MyCardsPageLocators():
         ("id", "delete"),
     ]
 
+    first_delete_locator = [
+        ("xpath", "(//button[@id='delete'])[1]"),
+    ]
+
+
+
     edit_locator = [
         ("id", "edit"),
     ]

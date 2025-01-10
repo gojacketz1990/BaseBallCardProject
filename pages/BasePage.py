@@ -46,6 +46,22 @@ class BasePage:
 
         raise NoSuchElementException(f"Element not found using any of the provided locators: {locators}")
 
+    def get_element_clickable(self, locators):
+        """Find a single web element using self-healing locators."""
+        wait = WebDriverWait(self.driver,10)
+        for locator_type, locator_value in locators:
+            try:
+                by_method = self._get_by_method(locator_type)
+                element = wait.until(EC.element_to_be_clickable((by_method, locator_value)))
+                #print(f"Element found using locator: {locator_type}={locator_value}")
+                return element
+            except (NoSuchElementException, TimeoutException):
+                print(f"Locator failed: {locator_type}={locator_value}")
+                continue
+
+        raise NoSuchElementException(f"Element not found using any of the provided locators: {locators}")
+
+
 
 
     def get_elements(self, locators):
@@ -144,7 +160,7 @@ class BasePage:
 
     def element_click(self, locators):
         """Click a web element found using self-healing locators."""
-        element = self.get_element(locators)
+        element = self.get_element_clickable(locators)
         element.click()
 
     def wait_presence_element(self, locators, timeout=10):#need to update this with try/except
