@@ -2,6 +2,7 @@ from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.wait import WebDriverWait
 from pages.BasePage import BasePage
 from locators.my_cards_page_locators import MyCardsPageLocators
+from selenium.webdriver.support import expected_conditions as EC
 
 import time
 import random
@@ -46,8 +47,7 @@ class MyCardsPage(BasePage):
 
     def deleteFirstCard(self):
         self.element_click(self.myCardsPageLocators.first_delete_locator)
-        self.element_click(self.myCardsPageLocators.confirm_delete_button_loctor)
-
+        self.element_click(self.myCardsPageLocators.confirm_delete_button_locator)
 
     def deleteCard(self,cardname):
 
@@ -62,7 +62,7 @@ class MyCardsPage(BasePage):
                 time.sleep(3)
                 self.element_child_click(card, self.myCardsPageLocators.delete_locator)
                 time.sleep(3)
-                self.element_click(self.myCardsPageLocators.confirm_delete_button_loctor)
+                self.element_click(self.myCardsPageLocators.confirm_delete_button_locator)
                 time.sleep(2)
 
     def editCard(self,cardname):
@@ -87,3 +87,8 @@ class MyCardsPage(BasePage):
         #print(len(cards))
         return len(cards)
 
+
+    def userHome(self):
+        from pages.UserHomePage import UserHomePage
+        self.element_click(self.myCardsPageLocators.userhome)
+        return UserHomePage(self.driver)

@@ -30,9 +30,13 @@ class TestUserHomePage(BaseTests):
         cardCatalogHome = CardCatalogHome(self.driver)
         authenticationPage = cardCatalogHome.click_authenticate()
         userHomePage = authenticationPage.login_to_site(self.username, self.password)
-        myCardPage = userHomePage.click_mycards()
+
         time.sleep(3)
 
         for i in range(1, 1501):
+            myCardPage = userHomePage.click_mycards()
             myCardPage.deleteFirstCard()
-            time.sleep(3)
+            time.sleep(0.5)
+            myCardPage.userHome()
+            #time.sleep(2)
+

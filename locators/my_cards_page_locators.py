@@ -92,10 +92,14 @@ class MyCardsPageLocators():
         ("class_name", "modal"),
     ]
 
-    confirm_delete_button_loctor  = [
+    confirm_delete_button_locator  = [
         ("id", "confirm-delete"),
     ]
 
-    confirm_cancel_button_loctor  = [
+    confirm_cancel_button_locator  = [
         ("id", "confirm-cancel"),
+    ]
+
+    userhome  = [
+        ("link_text", "USER"),
     ]

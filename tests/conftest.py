@@ -1,4 +1,5 @@
 import pytest
+import os
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
@@ -22,10 +23,6 @@ def setup_and_teardown(request):
     browser_name = request.config.getoption("browser_name")
     environment_name = request.config.getoption("environment_name")
     headless = request.config.getoption("--headless")
-
-    print(f"Browser: {browser_name}")
-    print(f"Environment: {environment_name}")
-    print(f"Headless: {headless}")
 
     if browser_name.lower() == "chrome":
         options = ChromeOptions()
@@ -59,10 +56,11 @@ def setup_and_teardown(request):
 
     driver.maximize_window()
     request.cls.driver = driver
+    request.node.driver = driver  # Attach driver to request node
 
-    # Yield for teardown
-    yield
+    yield driver  # Yield driver for test functions
     driver.quit()
+
 
 def pytest_html_results_table_header(cells):
     """Add a 'Description' column header."""
@@ -74,10 +72,28 @@ def pytest_html_results_table_row(report, cells):
     cells.insert(2, f"<td>{description}</td>")
 
 
+
+
 @pytest.hookimpl(tryfirst=True, hookwrapper=True)
 def pytest_runtest_makereport(item, call):
-    """Attach the test description to the report."""
+    # Execute all other hooks to get the test report
     outcome = yield
     report = outcome.get_result()
-    if call.when == "call":  # Only attach the description during the test call phase
-        report.description = getattr(item, "_description", "No description provided")
+
+    # Check if the test failed
+    if report.when == "call" and report.failed:
+        # Retrieve the driver
+        driver = getattr(item, "cls", None) and getattr(item.cls, "driver", None)
+        if not driver:
+            driver = getattr(item, "node", None) and getattr(item.node, "driver", None)
+
+        if driver:
+            # Ensure screenshots directory exists
+            if not os.path.exists("screenshots"):
+                os.makedirs("screenshots")
+
+            # Save the screenshot
+            screenshot_name = f"screenshots/{item.name}.png"
+            driver.save_screenshot(screenshot_name)
+            print(f"Screenshot saved to {screenshot_name}")
+

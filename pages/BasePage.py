@@ -3,7 +3,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import NoSuchElementException, TimeoutException
+from selenium.common.exceptions import NoSuchElementException, TimeoutException, StaleElementReferenceException
 import requests
 import random
 import time
@@ -47,19 +47,30 @@ class BasePage:
         raise NoSuchElementException(f"Element not found using any of the provided locators: {locators}")
 
     def get_element_clickable(self, locators):
-        """Find a single web element using self-healing locators."""
-        wait = WebDriverWait(self.driver,10)
+        """Find a single web element using self-healing locators in a React application."""
+        wait = WebDriverWait(self.driver, 10)
         for locator_type, locator_value in locators:
             try:
                 by_method = self._get_by_method(locator_type)
-                element = wait.until(EC.element_to_be_clickable((by_method, locator_value)))
-                #print(f"Element found using locator: {locator_type}={locator_value}")
-                return element
-            except (NoSuchElementException, TimeoutException):
-                print(f"Locator failed: {locator_type}={locator_value}")
+
+                # Wait for element presence to handle React re-renders
+                wait.until(EC.presence_of_element_located((by_method, locator_value)))
+
+                # Wait for the element to be clickable
+                wait.until(EC.element_to_be_clickable((by_method, locator_value)))
+
+                # Re-locate the element to ensure freshness
+                return self.driver.find_element(by_method, locator_value)
+
+            except (StaleElementReferenceException, TimeoutException):
+                print(f"Retrying due to dynamic React updates: {locator_type}={locator_value}")
                 continue
 
         raise NoSuchElementException(f"Element not found using any of the provided locators: {locators}")
+
+
+
+
 
 
 
@@ -160,8 +171,14 @@ class BasePage:
 
     def element_click(self, locators):
         """Click a web element found using self-healing locators."""
-        element = self.get_element_clickable(locators)
-        element.click()
+        for _ in range(10):  # Retry up to 3 times
+            try:
+                element = self.get_element_clickable(locators)
+                element.click()
+                return
+            except StaleElementReferenceException:
+                print("Retrying click due to stale element.")
+        raise StaleElementReferenceException(f"Failed to click element: {locators}")
 
     def wait_presence_element(self, locators, timeout=10):#need to update this with try/except
         """Wait for an element to be present using self-healing locators."""
