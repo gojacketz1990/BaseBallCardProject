@@ -14,3 +14,5 @@ class CardSummaryPage(BasePage):
 
     def card_summary(self):
         return self.header.navigate_cardsummary()
+
+

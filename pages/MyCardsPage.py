@@ -94,3 +94,5 @@ class MyCardsPage(BasePage):
         from pages.UserHomePage import UserHomePage
         self.element_click(self.myCardsPageLocators.userhome)
         return UserHomePage(self.driver)
+
+

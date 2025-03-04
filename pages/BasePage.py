@@ -222,6 +222,7 @@ class BasePage:
         """Click a child web element given the parent element found using self-healing locators."""
         element = self.get_child_element(parent_element, locators)
         element.click()
+
     def retrieve_element_text(self,locators):
         """Retrieve text from a web element"""
         element = self.get_element(locators)
@@ -462,3 +463,15 @@ class BasePage:
     def WebDriverWait(self, driver, param):
         pass
 
+    def find_text_on_page(self, text):
+        """Searches for a given text anywhere on the page."""
+        wait = WebDriverWait(self.driver,10)
+        xpath = f"//*[contains(text(), '{text}')]"
+        try:
+            return wait.until(EC.presence_of_element_located((By.XPATH, xpath))).text
+        except:
+            return None  # Return None if the text is not found
+
+    def is_text_present(self, text):
+        """Checks if a given text exists anywhere on the page."""
+        return self.find_text_on_page(text) is not None
