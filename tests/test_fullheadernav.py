@@ -18,13 +18,13 @@ class TestMyCardsPage(BaseTests):
         cardCatalogHome = CardCatalogHome(self.driver)
 
         # Click Authenticate (from Header)
-        authenticationPage = cardCatalogHome.click_authenticate()
+        authenticationPage = cardCatalogHome.header.navigate_authenticate()
 
         # Login
         userHomePage = authenticationPage.login_to_site(self.username, self.password)
 
         # Navigate to My Cards Page
-        myCardsPage = userHomePage.header.click_mycards()
+        myCardsPage = userHomePage.header.navigate_mycards()
         assert myCardsPage.is_text_present("Sort by Number"), "Text not found on page"
         time.sleep(2)
 
@@ -46,7 +46,7 @@ class TestMyCardsPage(BaseTests):
         time.sleep(1)
         # Navigate to Graded Card Summary
 
-        addCardPage = userHomePage.header.click_addCard()
+        addCardPage = userHomePage.header.navigate_addcard()
         time.sleep(1)
 
         assert addCardPage.is_text_present("Is this card an Insert"), "Text not found on page"
