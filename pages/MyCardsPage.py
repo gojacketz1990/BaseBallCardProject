@@ -2,6 +2,7 @@ from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.wait import WebDriverWait
 from pages.BasePage import BasePage
 from locators.my_cards_page_locators import MyCardsPageLocators
+from pages.HeaderComponents import HeaderComponent
 from selenium.webdriver.support import expected_conditions as EC
 
 import time
@@ -11,6 +12,7 @@ class MyCardsPage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
         self.myCardsPageLocators = MyCardsPageLocators()
+        self.header = HeaderComponent(driver)
 
     def selectSportFilter(self, sport):
         self.select_from_dropdown_by_visible_text(self.myCardsPageLocators.sportfilterdropdown_locator, sport)

@@ -10,9 +10,6 @@ class CardCatalogHomeLocators():
         ("xpath", "//input[@type='password']"),
     ]
 
-    authenticate_locator = [
-        ("id", "auth"),
-        ("name", "auth"),
-    ]
+
 
 

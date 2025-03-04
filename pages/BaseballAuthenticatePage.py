@@ -2,6 +2,7 @@ from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.wait import WebDriverWait
 
 from pages.BasePage import BasePage
+#from pages.navigation import Navigator
 
 from utilities.BaseTests import BaseTests
 from locators.card_authentication_page_locators import AuthenticationPageLocators
@@ -15,6 +16,7 @@ class AuthenticationPage(BasePage):
         self.authenticationPageLocators = AuthenticationPageLocators()
 
 
+
     def enter_username(self, username):
         self.type_into_element(username, self.authenticationPageLocators.name_locator)
 
@@ -26,6 +28,8 @@ class AuthenticationPage(BasePage):
 
     def click_switch_mode(self):
         self.element_click(self.authenticationPageLocators.switch_auth_mode_locator)
+
+
     def click_login_button(self):
         self.element_click(self.authenticationPageLocators.loginbutton_locator)
         #return UserHomePage(self.driver)
@@ -38,6 +42,7 @@ class AuthenticationPage(BasePage):
         except TimeoutException:
             #self.logger.info(f"Login successful for User")
             return UserHomePage(self.driver)
+
     def click_signup_button(self):
         self.element_click(self.authenticationPageLocators.signupbutton_locator)
         #self.element_click(self.authenticationPageLocators.error_okay_locator)
@@ -58,11 +63,15 @@ class AuthenticationPage(BasePage):
     def dismiss_invalid_credentials_error(self):
         self.element_click(self.authenticationPageLocators.error_okay_locator)
         return self
+
+
     def login_to_site(self, email, password):
         self.enter_email(email)
+        time.sleep(2)
         self.enter_password(password)
-        time.sleep(1)
-        return self.click_login_button()
+        time.sleep(2)
+        self.click_login_button()
+        return UserHomePage(self.driver)
 
 
     def login_to_site_invalid(self, email, password):

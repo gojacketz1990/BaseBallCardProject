@@ -4,23 +4,24 @@ from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.wait import WebDriverWait
 from pages.BasePage import BasePage
 from locators.users_home_page_locators import UsersHomePageLocators
+from pages.HeaderComponents import HeaderComponent
 
 class UserHomePage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
-        self.usersHomePageLocators = UsersHomePageLocators()
+        self.header = HeaderComponent(driver)
 
     def click_addCard(self):
-        from pages.AddCardPage import AddCardPage  # Lazy import to avoid circular dependency
-        self.element_click(self.usersHomePageLocators.add_card_link_locator)
-        return AddCardPage(self.driver)
+        return self.header.navigate_addcard()
 
     def click_mycards(self):
-        from pages.MyCardsPage import MyCardsPage  # Lazy import to avoid circular dependency
-        self.element_click(self.usersHomePageLocators.my_cards_link_locator)
-        return MyCardsPage(self.driver)
+        return self.header.navigate_mycards()
 
     def click_userlink(self):
-        from pages.MyCardsPage import MyCardsPage  # Lazy import to avoid circular dependency
-        self.element_click( self.usersHomePageLocators.user_link_locator)
-        return MyCardsPage(self.driver)
+        return self.header.navigate_userlink()
+
+    def click_cardsummary(self):
+        return self.header.navigate_cardsummary()
+
+    def click_gradedcardsummary(self):
+        return self.header.navigate_gradedcardsummary()
