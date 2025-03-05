@@ -40,12 +40,11 @@ class TestUserHomePage(BaseTests):
         log = self.getLogger()
         cardCatalogHome = CardCatalogHome(self.driver)
         with allure.step("Authenticate the user"):
-            authenticationPage = cardCatalogHome.click_authenticate()
+            authenticationPage = cardCatalogHome.header.navigate_authenticate()
             userHomePage = authenticationPage.login_to_site(self.username, self.password)
 
         with allure.step("Navigate to Add Card Page"):
-            addCardPage = userHomePage.click_addCard()
-
+            addCardPage = userHomePage.header.navigate_addcard()
         # Generate fak
         # e data
         fake = Faker()

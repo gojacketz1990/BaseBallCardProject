@@ -61,39 +61,40 @@ def setup_and_teardown(request):
     yield driver  # Yield driver for test functions
     driver.quit()
 
-
 def pytest_html_results_table_header(cells):
-    """Add a 'Description' column header."""
+    """Modify the report table to include a 'Description' column."""
     cells.insert(2, "<th>Description</th>")
 
 def pytest_html_results_table_row(report, cells):
-    """Populate the 'Description' column for each test."""
-    description = getattr(report, "description", "No description provided")
+    """Insert the test case description into the report."""
+    description = dict(report.user_properties).get("description", "Not a description provided")
     cells.insert(2, f"<td>{description}</td>")
 
-
-
-
 @pytest.hookimpl(tryfirst=True, hookwrapper=True)
+
 def pytest_runtest_makereport(item, call):
-    # Execute all other hooks to get the test report
+    """Hook to add the description from CSV into the test report."""
     outcome = yield
     report = outcome.get_result()
 
-    # Check if the test failed
+    # Default description if not found
+    description = "No description provided"
+
+    # Check if 'row' parameter is in the test case (from parametrize)
+    if "row" in item.funcargs:
+        row = item.funcargs["row"]
+        if "description" in row:
+            description = row["description"]
+
+    # Store description as a user property (MUST be a list of tuples)
+    report.user_properties = [("description", description)]
+
+    # Take a screenshot if the test fails
     if report.when == "call" and report.failed:
-        # Retrieve the driver
-        driver = getattr(item, "cls", None) and getattr(item.cls, "driver", None)
-        if not driver:
-            driver = getattr(item, "node", None) and getattr(item.node, "driver", None)
+        driver = getattr(item.cls, "driver", None) or getattr(item, "driver", None)
 
         if driver:
-            # Ensure screenshots directory exists
-            if not os.path.exists("screenshots"):
-                os.makedirs("screenshots")
-
-            # Save the screenshot
+            os.makedirs("screenshots", exist_ok=True)
             screenshot_name = f"screenshots/{item.name}.png"
             driver.save_screenshot(screenshot_name)
             print(f"Screenshot saved to {screenshot_name}")
-

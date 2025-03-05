@@ -36,9 +36,9 @@ class TestAddCardFormPage(BaseTests):
 
         log = self.getLogger()
         cardCatalogHome = CardCatalogHome(self.driver)
-        authenticationPage = cardCatalogHome.click_authenticate()
+        authenticationPage = cardCatalogHome.header.navigate_authenticate()
         userHomePage = authenticationPage.login_to_site(self.username, self.password)
-        addCardPage = userHomePage.click_addCard()
+        addCardPage = userHomePage.header.navigate_addcard()
 
         # Generate fake data
         fake = Faker()

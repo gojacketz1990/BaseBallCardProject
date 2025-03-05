@@ -10,12 +10,12 @@ class TestUserHomePage(BaseTests):
         log = self.getLogger()
         cardCatalogHome = CardCatalogHome(self.driver)
 
-        authenticationPage = cardCatalogHome.click_authenticate()
+        authenticationPage = cardCatalogHome.header.navigate_authenticate()
 
         userHomePage = authenticationPage.login_to_site('gojacketz@icloud.com', 'reapit')
 
         for i in range(1000):
-            addCardPage = userHomePage.click_addCard()
+            addCardPage = userHomePage.header.navigate_addcard()
             fake = Faker()
             fake_name = fake.name()
             fake_address = fake.address()

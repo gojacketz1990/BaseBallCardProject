@@ -230,37 +230,84 @@ class AddCardPage(BasePage):
         return UserHomePage(self.driver)
 
 
+    def addCard(self, sport, cardname, cardnumber, cardcompany, cardrelease, isParallel, paralleltype, isInsert,
+                              inserttype, isGraded, gradecompany, grade, certnumber, isRelic, isAuto, isnumbered, number, numberoutof,
+                                notes, year, file):
 
-            # self.randomselectCardCompany()
-            # self.randomselectRelease()
-            #
-            # if random.choice([True, False]):
-            #
-            #     self.select_insert()
-            #     self.select_random_insert()
-            #
-            # if random.choice([True, False]):
-            #     self.select_parallel()
-            #     self.select_random_parallel()
-            #
-            # if random.choice([True, False]):
-            #     self.select_isgraded()
-            #     self.select_random_gradecompany()
-            #     self.select_random_grade()
-            #     self.enterCertID(certnumber)
-            #
-            # if random.choice([True, False]):
-            #     self.isAuto()
-            # if random.choice([True, False]):
-            #     self.isRelic()
-            # self.enterDescription(description)
-            #
-            #
-            # self.randomselectYear()
-            # self.uploadFile(filePath)
-            # #time.sleep(1)
-            # self.click_addcardbutton()
-            # time.sleep(1)
-            # return UserHomePage(self.driver)
-            #
-            #
+        from pages.UserHomePage import UserHomePage  # Lazy import to avoid circular dependency
+
+        # Set the form fields
+        if sport != '':
+            self.selectSport(sport)
+
+        if cardname != '':
+            self.enterCardName(cardname)
+
+        if cardnumber != '':
+            self.enterCardNumber(cardnumber)
+
+        if cardcompany != '':
+            self.selectCardCompany(cardcompany)
+
+        if cardrelease != '':
+            self.selectRelease(cardrelease)
+
+
+        if isParallel == True:
+            self.select_parallel()
+            if paralleltype != '':
+                self.select_paralleltype(paralleltype)
+
+        if isInsert == True:
+            self.select_insert()
+            if inserttype != '':
+                self.select_inserttype(inserttype)
+
+
+        if isGraded == True:
+            self.select_isgraded()
+            if gradecompany != '':
+                self.select_gradecompany(gradecompany)
+                if grade != '':
+                    self.select_grade(grade)
+                    if certnumber != '':
+                        self.enterCertID(certnumber)
+
+        if isRelic == True:
+            self.isRelic()
+
+        if isAuto == True:
+            self.isAuto()
+
+        if isnumbered == True:
+            self.select_numbered("ON")
+            if number != '':
+                self.set_number(number)
+            if numberoutof != '':
+                self.set_number_out_of(numberoutof)
+
+
+        self.enterDescription(notes)
+
+        if year != '':
+            self.selectYear(year)
+
+        if file != '':
+            self.uploadFile(file)
+
+        # Wait for the form to update
+
+        # Check the state of the Add Card button
+        isActive = self.isAddFormActive()
+
+        #expectedstate = bool(expectedstate)  # Normalize expectedState to boolean
+
+        #assert isActive == expectedstate, f"The Add Card Button state mismatch: Expected {expectedstate}, but got {isActive}."
+
+        # Add Card
+        self.click_addcardbutton()
+
+        time.sleep(3)
+
+        return UserHomePage(self.driver)
+

@@ -12,15 +12,15 @@ class CardCatalogHome(BasePage):
         self.CardCatalogHomeLocators = CardCatalogHomeLocators()
         self.header = HeaderComponent(driver)
 
-    def click_cardcatalogHome(self):
-        self.element_click( self.CardCatalogHomeLocators.card_catalog_home_locator)
-
-
-
-    def click_authenticate(self):
-        return self.header.navigate_authenticate()
-
-    def click_allusers(self):
-        self.element_click( self.CardCatalogHomeLocators.all_users_locator)
+    # def click_cardcatalogHome(self):
+    #     self.element_click( self.CardCatalogHomeLocators.card_catalog_home_locator)
+    #
+    #
+    #
+    # def click_authenticate(self):
+    #     return self.header.navigate_authenticate()
+    #
+    # def click_allusers(self):
+    #     self.element_click( self.CardCatalogHomeLocators.all_users_locator)
 
 
