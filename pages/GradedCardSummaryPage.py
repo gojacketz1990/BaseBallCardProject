@@ -5,7 +5,7 @@ from locators.graded_card_summary_page_locators import GradedCardSummaryPageLoca
 from pages.HeaderComponents import HeaderComponent
 import time
 import random
-from pages.HeaderComponents import HeaderComponent
+
 
 class GradedCardSummaryPage(BasePage):
     def __init__(self, driver):

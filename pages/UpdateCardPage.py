@@ -2,6 +2,7 @@ from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.wait import WebDriverWait
 from pages.BasePage import BasePage
 from locators.update_card_page_locators import UpdateCardPageLocators
+from pages.HeaderComponents import HeaderComponent
 
 import time
 import random

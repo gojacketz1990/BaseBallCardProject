@@ -7,6 +7,7 @@ from pages.BasePage import BasePage
 from utilities.BaseTests import BaseTests
 from locators.card_authentication_page_locators import AuthenticationPageLocators
 from pages.UserHomePage import UserHomePage
+from pages.HeaderComponents import HeaderComponent
 
 import time
 

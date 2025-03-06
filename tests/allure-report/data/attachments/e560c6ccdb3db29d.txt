@@ -1,0 +1,2 @@
+Card Name: Michael Dawson
+FilePath: /Users/gojacketz/PycharmProjects/BaseballCardProject/TestData/hogan.jpeg
