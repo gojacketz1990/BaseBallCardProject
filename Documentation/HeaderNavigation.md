@@ -13,3 +13,4 @@ Now the actual test file can call the links through the current page and return 
 
 So from the catalog home page you click on navigation which returns the authenticationPage
 
+
