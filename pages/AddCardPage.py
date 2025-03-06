@@ -7,6 +7,7 @@ from pages.HeaderComponents import HeaderComponent
 import time
 import random
 
+
 class AddCardPage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
