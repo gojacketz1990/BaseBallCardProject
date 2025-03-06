@@ -12,8 +12,8 @@ csv_data = read_csv(file_path)  # Returns a list of dictionaries
 # Create a list of tuples: (row, test_id)
 test_cases = [(row, row['TestName']) for row in csv_data]
 
-@pytest.mark.usefixtures("setup_and_teardown")  # Ensure setup from BaseTests is applied
-class TestUserHomePage(BaseTests):
+#@pytest.mark.usefixtures("setup_and_teardown")  # Ensure setup from BaseTests is applied
+class TestUserHomePage():
 
     @pytest.mark.parametrize("row", csv_data, ids=lambda row: row['TestName'])
 
