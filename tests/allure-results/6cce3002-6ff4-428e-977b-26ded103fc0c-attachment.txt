@@ -1,2 +1,0 @@
-Card Name: Michael Ochoa
-FilePath: /Users/gojacketz/PycharmProjects/BaseballCardProject/TestData/hogan.jpeg

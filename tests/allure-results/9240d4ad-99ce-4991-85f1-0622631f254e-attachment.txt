@@ -1,2 +1,0 @@
-Card Name: Joyce Jennings
-FilePath: /Users/gojacketz/PycharmProjects/BaseballCardProject/TestData/Bo.jpg
