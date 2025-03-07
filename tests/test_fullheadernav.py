@@ -7,7 +7,7 @@ from utilities.csv_utils import read_csv
 import time
 import configparser
 from pages.HeaderComponents import HeaderComponent
-
+from pages.UserHomePage import UserHomePage
 
 class TestMyCardsPage(BaseTests):
 
@@ -21,7 +21,18 @@ class TestMyCardsPage(BaseTests):
         authenticationPage = cardCatalogHome.header.navigate_authenticate()
 
         # Login
-        userHomePage = authenticationPage.login_to_site(self.username, self.password)
+
+        result = authenticationPage.login_to_site(self.username, self.password)
+
+        # ✅ Fix: Check if `result` is a dictionary before looking for "error"
+        if isinstance(result, dict) and "error" in result:
+            expected_error = "Invalid credentials, could not log you in."
+            assert result["error"] == expected_error, f"Expected '{expected_error}', but got '{result['error']}'"
+
+        else:
+            # ✅ If login was successful, assert that we are on the correct page
+            assert isinstance(result, UserHomePage), "Login returned an unexpected result!"
+            userHomePage = result
 
         # Navigate to My Cards Page
         myCardsPage = userHomePage.header.navigate_mycards()
