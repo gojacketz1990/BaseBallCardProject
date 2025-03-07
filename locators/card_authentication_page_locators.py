@@ -36,5 +36,5 @@ class AuthenticationPageLocators():
     ]
 
     error_okay_locator = [
-        ("name", "Ham"),
+        ("id", "errorMessageOK"),
     ]

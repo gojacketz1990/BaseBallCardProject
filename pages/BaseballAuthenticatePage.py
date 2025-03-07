@@ -30,19 +30,22 @@ class AuthenticationPage(BasePage):
     def click_switch_mode(self):
         self.element_click(self.authenticationPageLocators.switch_auth_mode_locator)
 
-
     def click_login_button(self):
+        """Clicks login and returns an error message (if login fails) or UserHomePage (if successful)."""
         self.element_click(self.authenticationPageLocators.loginbutton_locator)
-        #return UserHomePage(self.driver)
+
         try:
+            # ✅ Wait for the error message (if login fails)
             error_message = self.wait_presence_element(self.authenticationPageLocators.login_error_locator).text
-            print(error_message)
-            time.sleep(2)
-            self.element_child_click(self.authenticationPageLocators.error_okay_locator)
-            return self#next page goes here
+            print(f"Login failed: {error_message}")  # ✅ Debugging output
+
+            return {"error": error_message}  # ✅ Return error for the test to validate
+
         except TimeoutException:
-            #self.logger.info(f"Login successful for User")
-            return UserHomePage(self.driver)
+            # ✅ No error → Login was successful
+            return {"page": UserHomePage(self.driver)}
+
+
 
     def click_signup_button(self):
         self.element_click(self.authenticationPageLocators.signupbutton_locator)
@@ -51,7 +54,7 @@ class AuthenticationPage(BasePage):
             error_message = self.wait_presence_element(self.authenticationPageLocators.login_error_locator).text
             print(error_message)
             time.sleep(2)
-            self.element_child_click(self.authenticationPageLocators.error_okay_locator)
+            self.element_click(self.authenticationPageLocators.error_okay_locator)
             time.sleep(2)
             #self.logger.error(f"Login failed for Username: {username}, Password: {password}. Error: {error_message}")
             return self#next page goes here
@@ -66,13 +69,33 @@ class AuthenticationPage(BasePage):
         return self
 
 
+    # def login_to_site(self, email, password):
+    #     self.enter_email(email)
+    #     time.sleep(1)
+    #     self.enter_password(password)
+    #     time.sleep(1)
+    #     self.click_login_button()
+    #     return UserHomePage(self.driver)
+    #
+    # from selenium.common.exceptions import TimeoutException
+
+
     def login_to_site(self, email, password):
+        """Attempts to log in and returns UserHomePage on success, or an error message on failure."""
         self.enter_email(email)
-        time.sleep(2)
+        time.sleep(1)
         self.enter_password(password)
-        time.sleep(2)
-        self.click_login_button()
+        time.sleep(1)
+
+        result = self.click_login_button()  # ✅ Now `click_login_button()` returns either an error or a new page
+
+        # ✅ Check if login failed (error message was returned)
+        if "error" in result:
+            return result  # Return the error message for validation in the test
+
+        # ✅ If login succeeds, return UserHomePage instance
         return UserHomePage(self.driver)
+
 
 
     def login_to_site_invalid(self, email, password):

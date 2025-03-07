@@ -14,11 +14,11 @@ class TestMyCardsPage(BaseTests):
 
         cardCatalogHome = CardCatalogHome(self.driver)
 
-        authenticationPage = cardCatalogHome.click_authenticate()
+        authenticationPage = cardCatalogHome.header.navigate_authenticate()
 
         userHomePage = authenticationPage.login_to_site(self.username, self.password)
 
-        myCardPage = userHomePage.click_userlink()
+        myCardPage = userHomePage.header.navigate_userlink()
         time.sleep(3)
 
         cardsbeforefilter = myCardPage.countCards()
