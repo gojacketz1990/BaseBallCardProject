@@ -8,7 +8,6 @@ import configparser
 
 class TestLogins(BaseTests):
 
-
     def test_valid_login(self):
         log = self.getLogger()
 
