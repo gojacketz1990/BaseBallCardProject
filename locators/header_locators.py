@@ -4,7 +4,6 @@ class HeaderLocators():
         ("link_text", "MY CARDS"),
     ]
 
-
     add_card_link_locator = [
         ("link_text", "ADD CARD"),
     ]
@@ -12,7 +11,6 @@ class HeaderLocators():
     card_summary_link_locator  = [
         ("link_text", "CARD SUMMARY"),
     ]
-
 
     graded_card_summary_link_locator  = [
         ("link_text", "GRADED CARD SUMMARY"),
