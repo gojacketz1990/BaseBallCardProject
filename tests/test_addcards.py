@@ -79,3 +79,6 @@ class TestUserHomePage(BaseTests):
             notes="",
             year="2023",
         )
+
+
+        addCardPage.addCardScreenshot(test_name+"_add_card.png")

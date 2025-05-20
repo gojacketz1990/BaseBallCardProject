@@ -471,3 +471,9 @@ class BasePage:
     def is_text_present(self, text):
         """Checks if a given text exists anywhere on the page."""
         return self.find_text_on_page(text) is not None
+
+    def take_screenshot(self, filename):
+                 # --- Take a full page screenshot ---
+        screenshot_filename = filename
+        self.driver.save_screenshot('screenshots/'+screenshot_filename)
+        print(f"Full page screenshot saved as {screenshot_filename}")

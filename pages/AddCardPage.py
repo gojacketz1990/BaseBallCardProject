@@ -317,3 +317,5 @@ class AddCardPage(BasePage):
 
         return UserHomePage(self.driver)
 
+    def addCardScreenshot(self,name):
+        self.take_screenshot(name)
