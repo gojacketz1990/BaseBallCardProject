@@ -8,7 +8,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 import configparser
 
 def test_simplepage():
-    driver = webdriver.Chrome()
+    driver = webdriver.Firefox()
 
     driver.get("http://www.google.com")
 

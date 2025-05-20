@@ -35,10 +35,6 @@ class UpdateCardPage(BasePage):
     def uploadFile(self,filePath):
         self.sendKeys_into_element(filePath, self.updateCardPageLocators.hidden_imageinput_locator)
 
-
-
-
-
     def randomselectCardCompany(self):
         self.select_random_in_dropdown(self.updateCardPageLocators.companydropdown_locator)
 

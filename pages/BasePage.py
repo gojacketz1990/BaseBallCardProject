@@ -31,6 +31,7 @@ class BasePage:
             raise ValueError(f"Invalid locator type: {locator_type}. Valid types are: {list(self.LOCATOR_DICT.keys())}")
         return self.LOCATOR_DICT[locator_type]
 
+
     def get_element(self, locators):
         """Find a single web element using self-healing locators."""
         wait = WebDriverWait(self.driver,10)
@@ -67,11 +68,6 @@ class BasePage:
                 continue
 
         raise NoSuchElementException(f"Element not found using any of the provided locators: {locators}")
-
-
-
-
-
 
 
 
@@ -150,7 +146,7 @@ class BasePage:
 
 
     def type_into_element_clear(self, text, locators):
-        """Clear a web element's text and type new text using self-healing locators."""
+        """Clear a web element's text and type new text using self-healing locators.  Does this with javascript."""
 
         # Get the element using self-healing locators
         element = self.get_element(locators)

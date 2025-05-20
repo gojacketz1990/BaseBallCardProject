@@ -12,6 +12,7 @@ class HeaderComponent(BasePage):
         self.element_click(self.headerLocators.authenticate_locator)
         return AuthenticationPage(self.driver)
 
+
     def navigate_userlink(self):
         from pages.UserHomePage import UserHomePage
         self.element_click(self.headerLocators.user_link_locator)

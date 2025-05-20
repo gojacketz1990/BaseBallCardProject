@@ -69,17 +69,6 @@ class AuthenticationPage(BasePage):
         return self
 
 
-    # def login_to_site(self, email, password):
-    #     self.enter_email(email)
-    #     time.sleep(1)
-    #     self.enter_password(password)
-    #     time.sleep(1)
-    #     self.click_login_button()
-    #     return UserHomePage(self.driver)
-    #
-    # from selenium.common.exceptions import TimeoutException
-
-
     def login_to_site(self, email, password):
         """Attempts to log in and returns UserHomePage on success, or an error message on failure."""
         self.enter_email(email)

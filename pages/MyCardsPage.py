@@ -82,7 +82,6 @@ class MyCardsPage(BasePage):
                 time.sleep(3)
                 return UpdateCardPage(self.driver)
 
-
     def countCards(self):
         from pages.UpdateCardPage import UpdateCardPage  # Lazy import to avoid circular dependency
         cards = self.get_elements(self.myCardsPageLocators.cards_locator)

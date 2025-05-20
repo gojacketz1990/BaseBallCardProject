@@ -15,11 +15,15 @@ class AddCardPage(BasePage):
 
     def click_mycards(self):
         self.element_click(self.addCardPageLocators.my_cards_link_locator)
+
+
     def selectSport(self, sport):
         self.select_from_dropdown_by_visible_text(self.addCardPageLocators.sport_dropdown_locator, sport)
 
     def removeSport(self):
         self.select_from_dropdown_by_visible_text(self.addCardPageLocators.sport_dropdown_locator, "-- Select Sport --")
+
+
     def enterCardName(self,cardname):
         self.wait_presence_element(self.addCardPageLocators.cardname_locator)
         self.type_into_element(cardname,self.addCardPageLocators.cardname_locator)
