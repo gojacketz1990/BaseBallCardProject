@@ -2,6 +2,8 @@
 from locators.header_locators import HeaderLocators
 from pages.BasePage import BasePage
 
+# Shared components by every page
+
 class HeaderComponent(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
@@ -22,7 +24,6 @@ class HeaderComponent(BasePage):
         from pages.MyCardsPage import MyCardsPage
         self.element_click(self.headerLocators.my_cards_link_locator)
         return MyCardsPage(self.driver)
-
 
     def navigate_addcard(self):
         from pages.AddCardPage import AddCardPage  # Lazy import to avoid circular dependency
