@@ -8,11 +8,27 @@ All locators are housed in the individual page classes.  They will be defined as
         ("id", "user-name"),
         ("xpath", "//input[@placeholder='Username']")
 
-Each locator for the individual web element has a tuple which contains an ordered list of strings.  You can iterate over the list to access each tuple:
+To get an element on the page, get_element(locators) is called which calls an internal _get_by_method to determine the 
+locator_type to use from the LOCATOR_DICT, LOCATOR_DICT(locator_type) is returned. get_element will loop through the 
+list of tuple locators until it finds the element and if found will return the element or return an error if the element 
+is not found.  
 
-    for locator in username_locator:
-        locator_type, locator_value = locator
+get_element: 
 
+    def get_element(self, locators):
+      """Find a single web element using self-healing locators."""
+        wait = WebDriverWait(self.driver,10)
+        for locator_type, locator_value in locators:
+            try:
+                by_method = self._get_by_method(locator_type)
+                element = wait.until(EC.presence_of_element_located((by_method, locator_value)))
+                #print(f"Element found using locator: {locator_type}={locator_value}")
+                return element
+            except (NoSuchElementException, TimeoutException):
+                print(f"Locator failed: {locator_type}={locator_value}")
+                continue
+
+        raise NoSuchElementException(f"Element not found using any of the provided locators: {locators}")
 
 Which calls the _get_by_method and returns the locator By Method to use:
 
@@ -36,6 +52,7 @@ In the BasePage class we have defined a dictionary of all of the locator types a
         "tag_name": By.TAG_NAME,
     }
 
+The element is returned to the by get_element(s)
 The locators are done this way to build in a self-healing functionality in the case that one or more of the locators has changed in the DOM (Document Object Model).
 The get_element methods are an extension of find_element and will use the _get_by_method to locate the locator type value.
 If an element is not found, the method will self-heal by using a second or third method to find the element.

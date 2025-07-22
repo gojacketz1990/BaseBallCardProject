@@ -7,7 +7,6 @@ class CardCatalogHomeLocators():
     all_users_locator = [
         ("id", "allUsers"),
         ("name", "allUsers"),
-        ("xpath", "//input[@type='password']"),
     ]
 
 
